@@ -1,0 +1,43 @@
+version: '3.9'
+services:
+  mongo:
+    image: mongo
+    restart: always
+    volumes:
+      - ./data/mongo:/data/db
+      - ./data/mongo-init:/docker-entrypoint-initdb.d
+    ports:
+      - ${MONGO_PORT}:${MONGO_PORT}
+
+  mongo-express:
+    image: mongo-express:latest
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_MONGODB_PORT: ${MONGO_PORT}
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: 'true'
+
+  backend:
+    container_name: maps_backend_node
+    build: backend/.
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+    env_file:
+      - backend/.env.example
+    restart: unless-stopped
+
+  frontend:
+    container_name: maps_frontend
+    build: frontend/.
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+      - backend
+    env_file:
+      - backend/.env.example  
+    restart: unless-stopped
