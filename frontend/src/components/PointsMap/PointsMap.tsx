@@ -56,10 +56,8 @@ const PointsMap: React.FC = () => {
 
     function MyComponent() {
         const map = useMapEvents({
-
             click: (event) => {
                 setNewMarker([event.latlng.lat, event.latlng.lng]);
-                console.log(newMarker)
             },
         });
 
