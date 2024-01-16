@@ -59,13 +59,6 @@ const NavBar: React.FC = () => {
                                         Directions
                                     </Button>
                                 </MenuItem>
-                                <Divider />
-                                <MenuItem onClick={() => { }}>
-                                    <Button onClick={() => { }} colorScheme="blue" variant="link" size="md" isDisabled={true}>
-                                        Logout
-                                    </Button>
-                                </MenuItem>
-
                             </MenuList>
                         </Menu>
                     </Stack>
@@ -77,9 +70,6 @@ const NavBar: React.FC = () => {
                         </Button>
                         <Button onClick={() => { navigate("/directions") }} colorScheme="blue" size="sm">
                             Directions
-                        </Button>
-                        <Button onClick={() => { }} colorScheme="blue" size="sm" isDisabled={true}>
-                            Logout
                         </Button>
                     </Stack>
                 )}
